@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 import numpy as np
 import time
 
@@ -78,12 +77,6 @@ for step in np.arange(0, 4, 0.01):
     for i in new_verticies:
         x_bifurcation.append(step)
         y_bifurcation.append(i)
-
-
-
-
-
-
 
 
     ax1.set_title('r=' + str(round(step, 2)))
