@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import matplotlib.animation as animation
 import numpy as np
 import time
 
@@ -7,6 +6,9 @@ plt.ion()
 
 fig, ax = plt.subplots()
 ax.set_title('r=0')
+ax.set_ylabel('population')
+ax.set_xlabel('year')
+ax.set_ylim(0, 1)
 
 
 x = np.arange(1, 51, 1)
