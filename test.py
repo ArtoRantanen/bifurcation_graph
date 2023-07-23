@@ -4,7 +4,8 @@ from matplotlib.animation import FuncAnimation
 
 
 fig = plt.figure()
-ax = plt.axes(xlim=(0, 50), ylim=(0, 2))
+ax = plt.axes(xlim=(0, 7), ylim=(-2, 2))
+ax.grid(color='black', linewidth=1, linestyle='--')
 line, = ax.plot([], [], lw=3)
 
 def init():
@@ -13,7 +14,7 @@ def init():
 
 def animate(i):
     x = np.linspace(0, 50, 1000)
-    y = np.sin(2 * np.pi * (x - 0.01 * i))
+    y = np.sin(np.pi * (x - 0.01 * i)) + np.sin(np.pi*x)
     line.set_data(x, y)
     return line,
 
