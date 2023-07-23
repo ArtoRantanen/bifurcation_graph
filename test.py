@@ -1,24 +1,37 @@
+import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import pyplot as plt
-from matplotlib.animation import FuncAnimation
+import time
+
+plt.ion()
+
+fig, ax = plt.subplots()
+ax.set_title('r=0')
+ax.set_ylabel('population')
+ax.set_xlabel('year')
+ax.set_ylim(0, 1)
 
 
-fig = plt.figure()
-ax = plt.axes(xlim=(0, 7), ylim=(-2, 2))
-ax.grid(color='black', linewidth=1, linestyle='--')
-line, = ax.plot([], [], lw=3)
+x = np.arange(1, 51, 1)
+y = np.arange(0, 1, 0.02)
+line, = ax.plot(x, y, marker='o', color='b')
 
-def init():
-    line.set_data([], [])
-    return line,
+for step in np.arange(0, 4, 0.01):
+    r = step
+    x_prev = 0.5
+    y = [x_prev]
+    for year in range(49):
+        x = x_prev * r * (1 - x_prev)
+        y.append(x)
+        x_prev = x
+    ax.set_title('r=' + str(round(step, 2)))
+    line.set_ydata(y)
 
-def animate(i):
-    x = np.linspace(0, 50, 1000)
-    y = np.sin(np.pi * (x - 0.01 * i)) + np.sin(np.pi*x)
-    line.set_data(x, y)
-    return line,
+    plt.draw()
+    plt.gcf().canvas.flush_events()
 
-anim = FuncAnimation(fig, animate, init_func=init,
-                               frames=200, interval=20, blit=True)
+    time.sleep(0.02)
+#x(n+1) = r*x(n)*(1 - x(n))
+
 
 plt.show()
+
